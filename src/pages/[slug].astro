@@ -1,0 +1,43 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const terms = await getCollection('terms');
+  return terms.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const related = await Promise.all(entry.data.related.map((r) => getEntry(r)));
+const url = new URL(`/${entry.slug}/`, Astro.site).href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTerm',
+  name: entry.data.term,
+  description: entry.data.short,
+  alternateName: entry.data.aliases,
+  url,
+  inDefinedTermSet: {
+    '@type': 'DefinedTermSet',
+    name: 'rjmlaird.co.uk Glossary',
+    url: new URL('/', Astro.site).href,
+  },
+};
+---
+<Layout title={`${entry.data.term} · Glossary`} description={entry.data.short}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <p><a href="/" data-pagefind-ignore>← All terms</a></p>
+  <h1 data-pagefind-body data-pagefind-meta={`short:${entry.data.short}`}>{entry.data.term}</h1>
+  {entry.data.aliases.length > 0 && (
+    <p data-pagefind-body class="muted">Also: {entry.data.aliases.join(', ')}</p>
+  )}
+  <p data-pagefind-ignore><strong>{entry.data.short}</strong></p>
+  <div data-pagefind-ignore><Content /></div>
+  {related.length > 0 && (
+    <section data-pagefind-ignore>
+      <h2>Related terms</h2>
+      <ul>{related.map((r) => r && <li><a href={`/${r.slug}/`}>{r.data.term}</a></li>)}</ul>
+    </section>
+  )}
+  <p class="muted" data-pagefind-ignore>Updated {entry.data.updated.toLocaleDateString('en-GB')}</p>
+</Layout>

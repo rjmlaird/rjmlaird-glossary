@@ -1,0 +1,32 @@
+---
+// Copy into other sites: src/components/Term.astro
+// Reads the glossary at build time. If the fetch fails, it renders plain text and never breaks the build.
+interface Props { slug: string }
+const { slug } = Astro.props;
+
+const g = globalThis as any;
+g.__glossary ??= fetch('https://glossary.rjmlaird.co.uk/terms.json')
+  .then((r) => (r.ok ? r.json() : []))
+  .catch(() => []);
+const terms: { slug: string; short: string; url: string }[] = await g.__glossary;
+const hit = terms.find((t) => t.slug === slug);
+if (!hit) console.warn(`[Term] "${slug}" not found in glossary`);
+---
+{hit ? (
+  <span class="term">
+    <a href={hit.url} aria-describedby={`tip-${slug}`}><slot /></a>
+    <span role="tooltip" id={`tip-${slug}`} class="term-tip">{hit.short}</span>
+  </span>
+) : <slot />}
+
+<style>
+  .term { position: relative; }
+  .term a { text-decoration: underline dotted; }
+  .term-tip {
+    position: absolute; left: 0; top: 100%; z-index: 10; width: max-content; max-width: 18rem;
+    padding: .5rem .75rem; border-radius: .375rem; font-size: .875rem; line-height: 1.4;
+    background: var(--fg, #1a1a1a); color: var(--bg, #fff);
+    opacity: 0; visibility: hidden; transition: opacity .15s;
+  }
+  .term:hover .term-tip, .term:focus-within .term-tip { opacity: 1; visibility: visible; }
+</style>

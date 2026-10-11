@@ -1,0 +1,13 @@
+name = "rjmlaird-glossary-sync"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[triggers]
+crons = ["0 6 * * *"]   # daily, 06:00 UTC
+
+[vars]
+GITHUB_REPO = "OWNER/REPO"        # TODO: the glossary repo
+GITHUB_BASE = "main"
+NOTION_DATABASE_ID = "TBC"        # TODO: once the Notion database exists
+
+# Secrets (wrangler secret put ...): NOTION_TOKEN, GITHUB_TOKEN

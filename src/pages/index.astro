@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import { categories } from '../content/config';
+
+const terms = (await getCollection('terms')).sort((a, b) =>
+  a.data.term.localeCompare(b.data.term, 'en-GB'));
+const groups = new Map<string, typeof terms>();
+for (const t of terms) {
+  const letter = t.data.term[0].toUpperCase();
+  groups.set(letter, [...(groups.get(letter) ?? []), t]);
+}
+---
+<Layout title="Glossary">
+  <h1 data-pagefind-ignore>Glossary</h1>
+  <div id="search" data-pagefind-ignore></div>
+  <div class="chips" role="group" aria-label="Filter by category" data-pagefind-ignore>
+    <button type="button" data-cat="all" aria-pressed="true">All</button>
+    {categories.map((c) => <button type="button" data-cat={c} aria-pressed="false">{c}</button>)}
+  </div>
+  {[...groups].map(([letter, items]) => (
+    <section data-letter>
+      <h2>{letter}</h2>
+      <ul>
+        {items.map((t) => (
+          <li data-cat={t.data.category}>
+            <a href={`/${t.slug}/`}>{t.data.term}</a>
+            <span class="muted"> — {t.data.short}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Layout>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script is:inline>
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.PagefindUI) new PagefindUI({ element: '#search', showSubResults: false, showImages: false });
+    const buttons = document.querySelectorAll('[data-cat][aria-pressed]');
+    buttons.forEach((b) => b.addEventListener('click', () => {
+      const cat = b.dataset.cat;
+      buttons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      document.querySelectorAll('li[data-cat]').forEach((li) => {
+        li.hidden = cat !== 'all' && li.dataset.cat !== cat;
+      });
+      document.querySelectorAll('section[data-letter]').forEach((s) => {
+        s.hidden = ![...s.querySelectorAll('li')].some((li) => !li.hidden);
+      });
+    }));
+  });
+</script>
