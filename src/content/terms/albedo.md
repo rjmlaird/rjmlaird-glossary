@@ -1,8 +1,9 @@
 ---
-title: Albedo
+term: Albedo
 type: glossary
-status: draft
-topics: [climate, astronomy]
+topics:
+  - climate
+  - astronomy
 source_ids: []
 publish: true
 created: 2026-10-17

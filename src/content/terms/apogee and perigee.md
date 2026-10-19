@@ -1,8 +1,9 @@
 ---
-title: Apogee and Perigee
+term: Apogee and Perigee
 type: glossary
-status: draft
-topics: [space-technology, astronomy]
+topics:
+  - space-technology
+  - astronomy
 source_ids: []
 publish: true
 created: 2026-10-17

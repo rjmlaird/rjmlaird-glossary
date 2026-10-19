@@ -1,8 +1,10 @@
 ---
-title: Light Pollution
+term: Light Pollution
 type: glossary
 status: draft
-topics: [astronomy, sustainability]
+topics:
+  - astronomy
+  - sustainability
 source_ids: []
 publish: true
 created: 2026-10-17

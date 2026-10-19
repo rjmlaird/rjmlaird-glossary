@@ -1,7 +1,8 @@
 ---
-term: Embodied carbon
+term: embodied carbon
 category: sustainability
-aliases: [embodied emissions]
+aliases:
+  - embodied emissions
 short: The greenhouse gas emissions released making and delivering a product or building.
 related: []
 updated: 2026-10-11

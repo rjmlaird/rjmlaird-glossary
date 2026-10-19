@@ -1,5 +1,5 @@
 ---
-title: AU
+term: AU
 type: glossary
 status: draft
 topics:

@@ -1,8 +1,9 @@
 ---
-title: Star Formation
+term: star formation
 type: glossary
 status: draft
-topics: [astronomy]
+topics:
+  - astronomy
 source_ids: []
 publish: true
 created: 2026-10-17

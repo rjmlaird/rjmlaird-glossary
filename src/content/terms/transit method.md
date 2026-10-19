@@ -1,8 +1,9 @@
 ---
-title: Transit Method
+term: transit method
 type: glossary
 status: draft
-topics: [astronomy]
+topics:
+  - astronomy
 source_ids: []
 publish: true
 created: 2026-10-17

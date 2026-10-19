@@ -1,8 +1,9 @@
 ---
-title: Black Body
+term: Black Body
 type: glossary
-status: draft
-topics: [astronomy, climate]
+topics:
+  - astronomy
+  - climate
 source_ids: []
 publish: true
 created: 2026-10-17

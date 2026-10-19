@@ -1,8 +1,9 @@
 ---
-title: Geostationary Orbit
+term: Geostationary Orbit
 type: glossary
 status: draft
-topics: [space-technology]
+topics:
+  - space-technology
 source_ids: []
 publish: true
 created: 2026-10-17

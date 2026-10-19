@@ -1,8 +1,10 @@
 ---
-title: Spectral Line
+term: spectral line
 type: glossary
 status: draft
-topics: [astronomy, earth-observation]
+topics:
+  - astronomy
+  - earth-observation
 source_ids: []
 publish: true
 created: 2026-10-17
