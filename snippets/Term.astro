@@ -1,6 +1,6 @@
 ---
-// Copy into other sites: src/components/Term.astro
-// Reads the glossary at build time. If the fetch fails, it renders plain text and never breaks the build.
+// Copy into other sites: src/components/Term.astro (they share global.css tokens).
+// Reads the glossary at build time. If the fetch fails it renders plain text and never breaks the build.
 interface Props { slug: string }
 const { slug } = Astro.props;
 
@@ -21,11 +21,13 @@ if (!hit) console.warn(`[Term] "${slug}" not found in glossary`);
 
 <style>
   .term { position: relative; }
-  .term a { text-decoration: underline dotted; }
+  .term a { color: var(--teal); text-decoration: underline dotted; text-underline-offset: 3px; }
+  .term a:hover, .term a:focus-visible { text-decoration-style: solid; }
   .term-tip {
-    position: absolute; left: 0; top: 100%; z-index: 10; width: max-content; max-width: 18rem;
-    padding: .5rem .75rem; border-radius: .375rem; font-size: .875rem; line-height: 1.4;
-    background: var(--fg, #1a1a1a); color: var(--bg, #fff);
+    position: absolute; left: 0; top: calc(100% + .35rem); z-index: 10; width: max-content; max-width: 18rem;
+    padding: .6rem .8rem; border-radius: var(--radius); border: 1px solid var(--bm);
+    background: var(--lift); color: var(--w);
+    font-family: var(--font-body); font-size: .8125rem; font-weight: 400; line-height: 1.5; letter-spacing: 0;
     opacity: 0; visibility: hidden; transition: opacity .15s;
   }
   .term:hover .term-tip, .term:focus-within .term-tip { opacity: 1; visibility: visible; }

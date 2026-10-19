@@ -1,8 +1,10 @@
 ---
-// PLACEHOLDER: swap for your rjmlaird.co.uk Layout.astro
 import '../styles/global.css';
+import '../styles/glossary.css';
+
 interface Props { title: string; description?: string }
 const { title, description = 'Plain-English definitions from rjmlaird.co.uk.' } = Astro.props;
+const path = Astro.url.pathname;
 ---
 <!doctype html>
 <html lang="en-GB">
@@ -11,12 +13,35 @@ const { title, description = 'Plain-English definitions from rjmlaird.co.uk.' } 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <meta name="theme-color" content="#0B0F1A" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    />
     <slot name="head" />
   </head>
   <body>
-    <header><a href="/">Glossary</a></header>
-    <main><slot /></main>
-    <footer class="muted">© rjmlaird.co.uk</footer>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <nav aria-label="Primary">
+      <a class="logo" href="/">rjmlaird<span>.glossary</span></a>
+      <ul class="nl">
+        <li><a href="/" aria-current={path === '/' ? 'page' : undefined}>A–Z</a></li>
+        <li><a href="https://rjmlaird.co.uk">rjmlaird.co.uk</a></li>
+      </ul>
+    </nav>
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <footer>
+      <p>© {new Date().getFullYear()} rjmlaird.co.uk. Definitions in British English.</p>
+      <div class="fs">
+        <a href="https://rjmlaird.co.uk">rjmlaird.co.uk</a>
+        <a href="/terms.json">terms.json</a>
+      </div>
+    </footer>
   </body>
 </html>

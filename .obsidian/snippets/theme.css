@@ -1,0 +1,122 @@
+/* rjmlaird — Obsidian theme derived from global.css (rjmlaird.co.uk brand system).
+   Dark is the primary scheme; light is a derived companion. */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+/* Shared across both schemes */
+body {
+  --font-text-theme: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-interface-theme: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-monospace-theme: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --h1-font: "Space Grotesk", var(--font-text-theme);
+  --h2-font: "Space Grotesk", var(--font-text-theme);
+  --h3-font: "Space Grotesk", var(--font-text-theme);
+  --h4-font: "Space Grotesk", var(--font-text-theme);
+  --h5-font: "Space Grotesk", var(--font-text-theme);
+  --h6-font: "Space Grotesk", var(--font-text-theme);
+  --h1-weight: 700;
+  --h2-weight: 700;
+  --h3-weight: 600;
+  --line-height-normal: 1.7;
+  --radius-s: 3px;
+  --radius-m: 6px;
+  --radius-l: 6px;
+  --text-on-accent: #0B0F1A;
+  --accent-h: 172;
+  --accent-s: 100%;
+  --accent-l: 38%;
+}
+
+/* Dark: brand tokens (--ink, --ink2, --card, --lift, --w, --mb, --m) */
+.theme-dark {
+  --background-primary: #0B0F1A;
+  --background-primary-alt: #0F1520;
+  --background-secondary: #0F1520;
+  --background-secondary-alt: #141B29;
+  --background-modifier-hover: rgba(255, 255, 255, .06);
+  --background-modifier-active-hover: rgba(0, 194, 168, .13);
+  --background-modifier-border: rgba(255, 255, 255, .11);
+  --background-modifier-border-hover: rgba(255, 255, 255, .2);
+  --background-modifier-border-focus: #7FE6D4;
+  --background-modifier-form-field: #141B29;
+  --background-modifier-cover: rgba(11, 15, 26, .8);
+  --background-code: #141B29;
+
+  --text-normal: #EDEAE3;
+  --text-muted: #9AA4B8;
+  --text-faint: #8A98B2;
+  --text-accent: #00C2A8;
+  --text-accent-hover: #7FE6D4;
+  --text-selection: rgba(0, 194, 168, .26);
+  --text-highlight-bg: rgba(245, 166, 35, .26);
+
+  --interactive-accent: #00C2A8;
+  --interactive-accent-hover: #7FE6D4;
+  --interactive-normal: #1A2236;
+  --interactive-hover: #202a42;
+
+  --color-red: #FF8080;    --color-red-rgb: 255, 128, 128;
+  --color-orange: #F5A623; --color-orange-rgb: 245, 166, 35;
+  --color-yellow: #F5A623; --color-yellow-rgb: 245, 166, 35;
+  --color-green: #4ADE80;  --color-green-rgb: 74, 222, 128;
+  --color-cyan: #00C2A8;   --color-cyan-rgb: 0, 194, 168;
+  --color-blue: #38BDF8;   --color-blue-rgb: 56, 189, 248;
+  --color-purple: #A78BFA; --color-purple-rgb: 167, 139, 250;
+  --color-pink: #FF8080;   --color-pink-rgb: 255, 128, 128;
+}
+
+/* Light: warm paper surfaces, darker accents for AA contrast */
+.theme-light {
+  --background-primary: #FAF9F5;
+  --background-primary-alt: #F2F0E9;
+  --background-secondary: #F2F0E9;
+  --background-secondary-alt: #E9E6DD;
+  --background-modifier-hover: rgba(11, 15, 26, .05);
+  --background-modifier-active-hover: rgba(0, 124, 110, .12);
+  --background-modifier-border: rgba(11, 15, 26, .14);
+  --background-modifier-border-hover: rgba(11, 15, 26, .26);
+  --background-modifier-border-focus: #007C6E;
+  --background-modifier-form-field: #FFFFFF;
+  --background-code: #EFEDE5;
+
+  --text-normal: #1A2236;
+  --text-muted: #4B5568;
+  --text-faint: #5F6B80;
+  --text-accent: #007C6E;
+  --text-accent-hover: #005F54;
+  --text-selection: rgba(0, 194, 168, .26);
+  --text-highlight-bg: rgba(245, 166, 35, .35);
+
+  --interactive-accent: #007C6E;
+  --interactive-accent-hover: #005F54;
+  --text-on-accent: #FFFFFF;
+
+  --color-red: #C0392B;    --color-red-rgb: 192, 57, 43;
+  --color-orange: #B26A00; --color-orange-rgb: 178, 106, 0;
+  --color-yellow: #B26A00; --color-yellow-rgb: 178, 106, 0;
+  --color-green: #1E7F45;  --color-green-rgb: 30, 127, 69;
+  --color-cyan: #007C6E;   --color-cyan-rgb: 0, 124, 110;
+  --color-blue: #0B6FA4;   --color-blue-rgb: 11, 111, 164;
+  --color-purple: #6D4AD6; --color-purple-rgb: 109, 74, 214;
+  --color-pink: #C0392B;   --color-pink-rgb: 192, 57, 43;
+}
+
+/* Content styling */
+.markdown-rendered h1, .markdown-source-view.mod-cm6 .cm-header-1 { letter-spacing: -.03em; }
+.markdown-rendered h2, .markdown-source-view.mod-cm6 .cm-header-2 { letter-spacing: -.02em; }
+.markdown-rendered h6, .markdown-source-view.mod-cm6 .cm-header-6 {
+  text-transform: uppercase; letter-spacing: .14em; font-size: .8em; color: var(--text-muted);
+}
+.markdown-rendered a, .cm-s-obsidian .cm-link { text-decoration: underline; text-underline-offset: 2px; }
+.markdown-rendered hr { border-color: var(--background-modifier-border); }
+.markdown-rendered blockquote { border-left: 2px solid var(--interactive-accent); }
+.tag, a.tag {
+  text-transform: uppercase; letter-spacing: .08em; font-size: .75em; font-weight: 600;
+  border: 1px solid var(--background-modifier-border-hover);
+  background: transparent; color: var(--text-muted); border-radius: 2px;
+}
+
+/* Accessibility: brand focus ring */
+body :focus-visible { outline: 3px solid var(--background-modifier-border-focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .001ms !important; animation-duration: .001ms !important; }
+}

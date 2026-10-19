@@ -1,0 +1,53 @@
+/* Glossary-specific layout. Uses only the tokens and components in global.css
+   (.page-head, .sl, .tlbl, .tag, .filters/.filter-btn, .prose, .os-card, .stack-summary). */
+
+/* Search (Pagefind UI) themed with brand tokens */
+#search {
+  --pagefind-ui-scale: .9;
+  --pagefind-ui-primary: var(--teal);
+  --pagefind-ui-text: var(--w);
+  --pagefind-ui-background: var(--card);
+  --pagefind-ui-border: var(--bm);
+  --pagefind-ui-tag: var(--lift);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 6px;
+  --pagefind-ui-font: var(--font-body);
+  max-width: 44rem;
+  margin-bottom: 1.5rem;
+}
+#search mark { background: var(--td); color: var(--w); }
+#search .pagefind-ui__result-link { color: var(--w); font-family: var(--font-display); }
+#search .pagefind-ui__result-link:hover { color: var(--teal); }
+
+.filter-count { margin: -.5rem 0 1.5rem; font-family: var(--font-display); font-size: .75rem; color: var(--mb); }
+
+/* A–Z list */
+.term-list { list-style: none; }
+.term-row {
+  display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) auto; gap: 1.5rem; align-items: baseline;
+  padding: 1rem 0; border-bottom: 1px solid var(--bd);
+}
+.term-list > .term-row:first-child { border-top: 1px solid var(--bd); }
+.term-row[hidden], [data-letter][hidden] { display: none; }
+.term-row a { font-family: var(--font-display); font-size: 1rem; font-weight: 600; letter-spacing: -.01em; color: var(--w); text-decoration: none; transition: color .2s; }
+.term-row a:hover, .term-row a:focus-visible { color: var(--teal); }
+.term-row .short { font-size: .875rem; line-height: 1.6; color: var(--mb); }
+
+/* Category pills: same dim-fill pattern as .pp / .cred-badge */
+.cat-tag { white-space: nowrap; }
+.cat-space { color: var(--sky); background: var(--sd); border-color: var(--sb); }
+.cat-sustainability { color: var(--green); background: var(--gd); border-color: var(--gb); }
+.cat-marketing { color: var(--amber); background: var(--ad); border-color: var(--ab); }
+.cat-web-architecture { color: var(--violet); background: var(--vd); border-color: var(--vb); }
+
+/* Term page */
+.term-head h1 { max-width: 30ch; }
+.term-head .lede { font-size: 1.15rem; line-height: 1.6; color: var(--w); margin-bottom: 1rem; }
+.term-aliases { font-family: var(--font-display); font-size: .875rem; color: var(--mb); }
+.term-updated { margin-top: 2rem; font-family: var(--font-display); font-size: .75rem; color: var(--mb); }
+.term-related .os-grid { margin-top: 1rem; }
+
+@media (max-width: 700px) {
+  .term-row { grid-template-columns: 1fr; gap: .35rem; }
+  .term-row .cat-tag { justify-self: start; }
+}
