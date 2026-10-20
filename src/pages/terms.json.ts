@@ -6,10 +6,11 @@ export const GET: APIRoute = async ({ site }) => {
     .sort((a, b) => a.data.term.localeCompare(b.data.term, 'en-GB'))
     .map((t) => ({
       term: t.data.term,
-      slug: t.slug,
+      slug: t.id,
       short: t.data.short,
-      url: new URL(`/${t.slug}/`, site).href,
+      url: new URL(`/${t.id}/`, site).href,
     }));
+
   return new Response(JSON.stringify(terms), {
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
   });

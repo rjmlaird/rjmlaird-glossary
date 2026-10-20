@@ -16,6 +16,12 @@
   margin-bottom: 1.5rem;
 }
 #search mark { background: var(--td); color: var(--w); }
+#search input:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+#search .pagefind-ui__result-excerpt,
+#search .pagefind-ui__message { color: var(--mb); }
+#search .pagefind-ui__result { border-top-color: var(--bd); }
+#search .pagefind-ui__button { font-family: var(--font-display); color: var(--w); border-color: var(--bm); background: transparent; }
+#search .pagefind-ui__button:hover { border-color: var(--teal); }
 #search .pagefind-ui__result-link { color: var(--w); font-family: var(--font-display); }
 #search .pagefind-ui__result-link:hover { color: var(--teal); }
 
@@ -41,11 +47,17 @@
 .cat-web-architecture { color: var(--violet); background: var(--vd); border-color: var(--vb); }
 
 /* Term page */
+.term-crumb { margin-bottom: 1.25rem; }
 .term-head h1 { max-width: 30ch; }
 .term-head .lede { font-size: 1.15rem; line-height: 1.6; color: var(--w); margin-bottom: 1rem; }
 .term-aliases { font-family: var(--font-display); font-size: .875rem; color: var(--mb); }
 .term-updated { margin-top: 2rem; font-family: var(--font-display); font-size: .75rem; color: var(--mb); }
 .term-related .os-grid { margin-top: 1rem; }
+
+/* Larger touch targets for coarse pointers (WCAG 2.5.5), matching global.css */
+@media (pointer: coarse) {
+  .term-row a, .term-head .home-link { display: inline-block; padding-block: .6rem; }
+}
 
 @media (max-width: 700px) {
   .term-row { grid-template-columns: 1fr; gap: .35rem; }

@@ -24,7 +24,7 @@ if (!hit) console.warn(`[Term] "${slug}" not found in glossary`);
   .term a { color: var(--teal); text-decoration: underline dotted; text-underline-offset: 3px; }
   .term a:hover, .term a:focus-visible { text-decoration-style: solid; }
   .term-tip {
-    position: absolute; left: 0; top: calc(100% + .35rem); z-index: 10; width: max-content; max-width: 18rem;
+    position: absolute; left: 0; top: calc(100% + .35rem); z-index: 10; width: max-content; max-width: min(18rem, 80vw);
     padding: .6rem .8rem; border-radius: var(--radius); border: 1px solid var(--bm);
     background: var(--lift); color: var(--w);
     font-family: var(--font-body); font-size: .8125rem; font-weight: 400; line-height: 1.5; letter-spacing: 0;

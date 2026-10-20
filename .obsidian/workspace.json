@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/terms/astronomical unit.md",
+                "file": "src/content/terms/Doppler shift.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "astronomical unit"
+              "title": "Doppler shift"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "src/content/terms/astronomical unit.md",
+                "file": "src/content/terms/Doppler shift.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "src/content/terms/astronomical unit.md",
+                "file": "src/content/terms/Doppler shift.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "src/content/terms/astronomical unit.md",
+                "file": "src/content/terms/Doppler shift.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -201,28 +201,28 @@
   },
   "active": "27f206e70c100cf1",
   "lastOpenFiles": [
-    "src/content/terms/black body.md",
-    "src/content/terms/carbon budget.md",
-    "src/content/terms/apogee and perigee.md",
-    "src/content/terms/albedo.md",
-    "src/content/terms/embodied carbon.md",
-    "src/content/terms/earth observation.md",
-    "src/content/terms/greenhouse effect.md",
+    "src/content/terms/transit method.md",
+    "src/content/terms/star formation.md",
+    "src/content/terms/spectral line.md",
+    "src/content/terms/signal-to-noise-ratio.md",
+    "src/content/terms/remote sensing.md",
+    "src/content/terms/origin.md",
     "src/content/terms/magnitude.md",
     "src/content/terms/link budget.md",
-    "src/content/terms/remote sensing.md",
-    "src/content/terms/signal-to-noise-ratio.md",
-    "src/content/terms/spectral line.md",
-    "src/content/terms/star formation.md",
-    "src/content/terms/transit method.md",
-    "src/content/terms/origin.md",
     "src/content/terms/light pollution.md",
-    "src/content/terms/ground-station.md",
+    "src/content/terms/ground station.md",
+    "src/content/terms/greenhouse effect.md",
     "src/content/terms/geostationary orbit.md",
     "src/content/terms/emissivity.md",
+    "src/content/terms/embodied carbon.md",
+    "src/content/terms/earth observation.md",
     "src/content/terms/Doppler shift.md",
-    "src/content/terms/astronomical unit.md",
+    "src/content/terms/albedo.md",
+    "src/content/terms/apogee and perigee.md",
     "src/content/terms/architecture-decision-record.md",
+    "src/content/terms/astronomical unit.md",
+    "src/content/terms/black body.md",
+    "src/content/terms/carbon budget.md",
     "src/content/terms/satellite remote sensing.md"
   ]
 }

@@ -1,24 +1,42 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import { categories, categoryMeta } from '../content/config';
+import { categories, categoryMeta } from '../lib/categories';
 
 const terms = (await getCollection('terms')).sort((a, b) =>
-  a.data.term.localeCompare(b.data.term, 'en-GB'));
+  a.data.term.localeCompare(b.data.term, 'en-GB'),
+);
+
 const groups = new Map<string, typeof terms>();
-for (const t of terms) {
-  const letter = t.data.term[0].toUpperCase();
-  groups.set(letter, [...(groups.get(letter) ?? []), t]);
+
+for (const term of terms) {
+  const letter = term.data.term.charAt(0).toLocaleUpperCase('en-GB');
+  const existingTerms = groups.get(letter) ?? [];
+
+  groups.set(letter, [...existingTerms, term]);
 }
-const used = categories.filter((c) => terms.some((t) => t.data.category === c));
+
+const used = categories.filter((category) =>
+  terms.some((term) => term.data.category === category),
+);
 ---
-<Layout title="Glossary · rjmlaird.co.uk">
+
+<Layout
+  title="Glossary · rjmlaird.co.uk"
+  description="Plain-English definitions for space, sustainability, marketing and web architecture terms."
+>
   <header class="page-head">
     <p class="sl">Glossary</p>
+
     <h1>Plain-English definitions</h1>
+
     <div class="lede">
-      <p>Short, careful definitions for the space, sustainability, marketing and web architecture terms used across rjmlaird.co.uk.</p>
+      <p>
+        Short, careful definitions for the space, sustainability, marketing and
+        web architecture terms used across rjmlaird.co.uk.
+      </p>
     </div>
+
     <p class="stack-summary">
       <span><strong>{terms.length}</strong> terms</span>
       <span><strong>{used.length}</strong> categories</span>
@@ -29,55 +47,112 @@ const used = categories.filter((c) => terms.some((t) => t.data.category === c));
     <div id="search"></div>
 
     <div class="filters" role="group" aria-label="Filter by category">
-      <button type="button" class="filter-btn active" data-cat="all" aria-pressed="true">All</button>
-      {used.map((c) => (
-        <button type="button" class="filter-btn" data-cat={c} aria-pressed="false">
-          <span class="filter-dot" style={`background:${categoryMeta[c].colour}`}></span>{categoryMeta[c].label}
-        </button>
-      ))}
+      <button
+        type="button"
+        class="filter-btn active"
+        data-cat="all"
+        aria-pressed="true"
+      >
+        All
+      </button>
+
+      {
+        used.map((category) => (
+          <button
+            type="button"
+            class="filter-btn"
+            data-cat={category}
+            aria-pressed="false"
+          >
+            <span
+              class="filter-dot"
+              style={`background: ${categoryMeta[category].colour}`}
+            />
+            {categoryMeta[category].label}
+          </button>
+        ))
+      }
     </div>
-    <p class="filter-count" id="filter-count" aria-live="polite">Showing {terms.length} terms</p>
 
-    {[...groups].map(([letter, items]) => (
-      <div data-letter>
-        <h2 class="tlbl">{letter}</h2>
-        <ul class="term-list">
-          {items.map((t) => (
-            <li class="term-row" data-cat={t.data.category}>
-              <a href={`/${t.slug}/`}>{t.data.term}</a>
-              <span class="short">{t.data.short}</span>
-              <span class={`tag cat-tag cat-${t.data.category}`}>{categoryMeta[t.data.category].label}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    ))}
+    <p class="filter-count" id="filter-count" aria-live="polite">
+      Showing {terms.length} terms
+    </p>
+
+    {
+      [...groups].map(([letter, items]) => (
+        <div data-letter>
+          <h2 class="tlbl">{letter}</h2>
+
+          <ul class="term-list">
+            {items.map((term) => (
+              <li class="term-row" data-cat={term.data.category}>
+                <a href={`/${term.id}/`}>{term.data.term}</a>
+
+                <span class="short">{term.data.short}</span>
+
+                <span class={`tag cat-tag cat-${term.data.category}`}>
+                  {categoryMeta[term.data.category].label}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
   </section>
-</Layout>
+  <link slot="head" href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  <script slot="head" is:inline src="/pagefind/pagefind-ui.js"></script>
 
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-<script is:inline src="/pagefind/pagefind-ui.js"></script>
-<script is:inline>
+  <script is:inline>
   window.addEventListener('DOMContentLoaded', () => {
-    if (window.PagefindUI) new PagefindUI({ element: '#search', showSubResults: false, showImages: false });
-    const buttons = [...document.querySelectorAll('.filter-btn')];
+    if (window.PagefindUI) {
+      new PagefindUI({
+        element: '#search',
+        showSubResults: false,
+        showImages: false,
+      });
+    }
+
+    const buttons = Array.from(document.querySelectorAll('.filter-btn'));
     const count = document.getElementById('filter-count');
-    buttons.forEach((b) => b.addEventListener('click', () => {
-      const cat = b.dataset.cat;
-      buttons.forEach((x) => {
-        const on = x === b;
-        x.classList.toggle('active', on);
-        x.setAttribute('aria-pressed', String(on));
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const category = button.dataset.cat;
+
+        buttons.forEach((otherButton) => {
+          const isActive = otherButton === button;
+
+          otherButton.classList.toggle('active', isActive);
+          otherButton.setAttribute('aria-pressed', String(isActive));
+        });
+
+        let shown = 0;
+
+        document.querySelectorAll('.term-row').forEach((row) => {
+          const isVisible =
+            category === 'all' || row.dataset.cat === category;
+
+          row.hidden = !isVisible;
+
+          if (isVisible) {
+            shown += 1;
+          }
+        });
+
+        document.querySelectorAll('[data-letter]').forEach((group) => {
+          const hasVisibleTerms = Array.from(
+            group.querySelectorAll('.term-row'),
+          ).some((row) => !row.hidden);
+
+          group.hidden = !hasVisibleTerms;
+        });
+
+        if (count) {
+          count.textContent = `Showing ${shown} term${shown === 1 ? '' : 's'}`;
+        }
       });
-      let shown = 0;
-      document.querySelectorAll('.term-row').forEach((li) => {
-        li.hidden = cat !== 'all' && li.dataset.cat !== cat;
-        if (!li.hidden) shown += 1;
-      });
-      document.querySelectorAll('[data-letter]').forEach((g) => {
-        g.hidden = ![...g.querySelectorAll('.term-row')].some((li) => !li.hidden);
-      });
-      count.textContent = `Showing ${shown} term${shown === 1 ? '' : 's'}`;
-    }));
+    });
   });
 </script>
+</Layout>

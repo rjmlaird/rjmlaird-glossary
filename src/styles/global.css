@@ -32,6 +32,9 @@
   --green: #4ADE80;  --gd: rgba(74,222,128,.11);  --gb: rgba(74,222,128,.26);
   --sky: #38BDF8;    --sd: rgba(56,189,248,.11);  --sb: rgba(56,189,248,.26);
 
+  /* Text/icon colour for filled accent surfaces (teal buttons etc.): 8.46:1 on --teal */
+  --on-accent: var(--ink);
+
   /* Lines & focus */
   --bd: rgba(255,255,255,.11);
   --bm: rgba(255,255,255,.2);

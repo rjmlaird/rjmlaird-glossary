@@ -1,17 +1,35 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import {
+  getCollection,
+  getEntries,
+  render,
+  type CollectionEntry,
+} from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import { categoryMeta } from '../content/config';
+import { categoryMeta } from '../lib/categories';
 
 export async function getStaticPaths() {
   const terms = await getCollection('terms');
-  return terms.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+
+  return terms.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
 }
-const { entry } = Astro.props;
-const { Content } = await entry.render();
-const related = (await Promise.all(entry.data.related.map((r) => getEntry(r)))).filter(Boolean);
+
+interface Props {
+  entry: CollectionEntry<'terms'>;
+}
+
+const { entry } = Astro.props as Props;
+
+const { Content } = await render(entry);
+const related = await getEntries(entry.data.related);
+
 const meta = categoryMeta[entry.data.category];
-const url = new URL(`/${entry.slug}/`, Astro.site).href;
+
+const url = new URL(`/${entry.id}/`, Astro.site).href;
+
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'DefinedTerm',
@@ -26,37 +44,84 @@ const jsonLd = {
   },
 };
 ---
-<Layout title={`${entry.data.term} · Glossary · rjmlaird.co.uk`} description={entry.data.short}>
-  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<Layout
+  title={`${entry.data.term} · Glossary · rjmlaird.co.uk`}
+  description={entry.data.short}
+>
+  <script
+    slot="head"
+    type="application/ld+json"
+    set:html={JSON.stringify(jsonLd).replace(/</g, '\\u003c')}
+  />
 
   <header class="page-head term-head">
-    <p class="crumbs"><a class="home-link" href="/">← All terms</a></p>
+    <p class="term-crumb">
+      <a class="home-link" href="/">← All terms</a>
+    </p>
+
     <p class="sl">{meta.label}</p>
-    <h1 data-pagefind-body data-pagefind-meta={`short:${entry.data.short}`}>{entry.data.term}</h1>
-    <div class="lede"><p>{entry.data.short}</p></div>
-    {entry.data.aliases.length > 0 && (
-      <p class="term-aliases" data-pagefind-body>Also known as {entry.data.aliases.join(', ')}</p>
-    )}
+
+    <h1
+      data-pagefind-body
+      data-pagefind-meta={`short:${entry.data.short}`}
+    >
+      {entry.data.term}
+    </h1>
+
+    <div class="lede">
+      <p>{entry.data.short}</p>
+    </div>
+
+    {
+      entry.data.aliases.length > 0 && (
+        <p class="term-aliases" data-pagefind-body>
+          Also known as {entry.data.aliases.join(', ')}
+        </p>
+      )
+    }
   </header>
 
   <section>
-    <div class="prose"><Content /></div>
-    <p class="term-updated">Updated <time datetime={entry.data.updated.toISOString().slice(0, 10)}>{entry.data.updated.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>
+    <div class="prose">
+      <Content />
+    </div>
+
+    <p class="term-updated">
+      Updated{' '}
+      <time datetime={entry.data.updated.toISOString().slice(0, 10)}>
+        {entry.data.updated.toLocaleDateString('en-GB', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        })}
+      </time>
+    </p>
   </section>
 
-  {related.length > 0 && (
-    <section class="term-related">
-      <h2 class="tlbl">Related terms</h2>
-      <div class="os-grid">
-        {related.map((r) => r && (
-          <a class="os-card" href={`/${r.slug}/`}>
-            <span class="os-org">{categoryMeta[r.data.category].label}</span>
-            <span class="os-name">{r.data.term}</span>
-            <span class="os-desc">{r.data.short}</span>
-            <span class="os-footer"><span class="os-link">Read definition →</span></span>
-          </a>
-        ))}
-      </div>
-    </section>
-  )}
+  {
+    related.length > 0 && (
+      <section class="term-related">
+        <h2 class="tlbl">Related terms</h2>
+
+        <div class="os-grid">
+          {related.map((relatedEntry) => (
+            <a class="os-card" href={`/${relatedEntry.id}/`}>
+              <span class="os-org">
+                {categoryMeta[relatedEntry.data.category].label}
+              </span>
+
+              <span class="os-name">{relatedEntry.data.term}</span>
+
+              <span class="os-desc">{relatedEntry.data.short}</span>
+
+              <span class="os-footer">
+                <span class="os-link">Read definition →</span>
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+    )
+  }
 </Layout>
