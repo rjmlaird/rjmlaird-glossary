@@ -8,6 +8,8 @@ export const GET: APIRoute = async ({ site }) => {
       term: t.data.term,
       slug: t.id,
       short: t.data.short,
+      aliases: t.data.aliases,
+      category: t.data.category,
       url: new URL(`/${t.id}/`, site).href,
     }));
 

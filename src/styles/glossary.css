@@ -42,6 +42,9 @@
 /* Category pills: same dim-fill pattern as .pp / .cred-badge */
 .cat-tag { white-space: nowrap; }
 .cat-space { color: var(--sky); background: var(--sd); border-color: var(--sb); }
+.cat-earth-observation { color: var(--teal); background: var(--td); border-color: var(--tb); }
+.cat-climate-science { color: var(--coral); background: var(--cd); border-color: var(--cb); }
+.cat-science-communication { color: var(--amber); background: var(--ad); border-color: var(--ab); }
 .cat-sustainability { color: var(--green); background: var(--gd); border-color: var(--gb); }
 .cat-marketing { color: var(--amber); background: var(--ad); border-color: var(--ab); }
 .cat-web-architecture { color: var(--violet); background: var(--vd); border-color: var(--vb); }
