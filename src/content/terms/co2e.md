@@ -1,6 +1,6 @@
 ---
 term: "CO2e"
-category: carbon
+category: sustainability
 aliases: ["Carbon dioxide equivalent", "Carbon Dioxide Equivalent", "CO₂e"]
 short: "Carbon dioxide equivalent is a way of measuring and comparing all greenhouse gases and expressing them in one common unit."
 related: ["ghg", "carbon-footprint", "carbon-credits"]

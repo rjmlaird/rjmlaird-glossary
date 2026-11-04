@@ -1,6 +1,6 @@
 ---
 term: "Carbon footprint"
-category: carbon
+category: sustainability
 aliases: []
 short: "A carbon footprint is the amount of carbon emitted by an individual or organisation in a given period of time, or during the manufacture of a product."
 related: ["co2e", "carbon-scopes", "baseline", "lca"]

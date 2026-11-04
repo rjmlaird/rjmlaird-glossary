@@ -1,6 +1,6 @@
 ---
 term: "Carbon neutral"
-category: carbon
+category: sustainability
 aliases: ["Carbon neutrality"]
 short: "Carbon neutral describes a state where the emissions produced are offset by carbon credits or natural carbon sinks."
 related: ["net-zero", "carbon-offsetting", "carbon-credits", "greenwashing"]

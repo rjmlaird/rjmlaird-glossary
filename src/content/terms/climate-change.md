@@ -1,6 +1,6 @@
 ---
 term: "Climate change"
-category: carbon
+category: sustainability
 aliases: []
 short: "Climate change refers to the long-term shifts in temperatures and weather patterns."
 related: ["ghg", "carbon-budget", "net-zero"]

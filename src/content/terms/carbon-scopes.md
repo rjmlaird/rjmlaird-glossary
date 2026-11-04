@@ -1,6 +1,6 @@
 ---
 term: "Carbon scopes"
-category: carbon
+category: sustainability
 aliases: ["Scope 1", "Scope 2", "Scope 3", "Scopes 1, 2 and 3"]
 short: "Carbon scopes are a way of categorising the different kinds of emissions a company creates in its own operations and in its wider value chain."
 related: ["carbon-footprint", "value-chain", "supply-chain", "secr"]

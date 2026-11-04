@@ -1,6 +1,6 @@
 ---
 term: "Carbon offsetting"
-category: carbon
+category: sustainability
 aliases: ["Offsetting"]
 short: "Carbon offsetting is a way of compensating for emissions by participating in, or funding, efforts to take CO2 out of the atmosphere."
 related: ["carbon-credits", "carbon-neutral", "greenwashing"]
