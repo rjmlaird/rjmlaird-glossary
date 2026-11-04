@@ -11,14 +11,10 @@
             "id": "27f206e70c100cf1",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "src/content/terms/Doppler shift.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Doppler shift"
+              "title": "New tab"
             }
           }
         ]

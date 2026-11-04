@@ -1,10 +1,10 @@
 ---
 term: "Carbon budget"
-category: sustainability
+category: carbon
 aliases: []
-short: "A carbon budget is the total amount of carbon dioxide that can still be emitted while keeping global warming below a chosen limit, with a stated level of likelihood."
-related: ["greenhouse-effect"]
-updated: 2026-10-17
+short: "A carbon budget is a finite amount of carbon that can be emitted into the atmosphere before warming will exceed specific temperature thresholds."
+related: ["climate-change", "net-zero", "sbti"]
+updated: 2026-10-30
 ---
 
-Think of it as a remaining allowance. Estimates depend on the temperature target and on scientific uncertainties, so the numbers differ between sources and should always be cited with their assumptions.
+Once the budget is used up, further emissions risk pushing warming past those thresholds.
