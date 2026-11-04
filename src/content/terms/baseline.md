@@ -1,6 +1,6 @@
 ---
 term: "Baseline"
-category: carbon
+category: sustainability
 aliases: ["Baseline year"]
 short: "A baseline is the year against which countries or organisations measure their target decrease of emissions."
 related: ["crp", "sbti", "carbon-footprint", "net-zero"]
