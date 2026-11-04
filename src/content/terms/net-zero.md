@@ -1,6 +1,6 @@
 ---
 term: "Net zero"
-category: carbon
+category: sustainability
 aliases: ["Net-zero"]
 short: "Net zero is the overall balance between emitting and absorbing carbon in the atmosphere."
 related: ["carbon-neutral", "decarbonisation", "sbti", "baseline"]
